@@ -1,0 +1,26 @@
+﻿<Window
+    x:Class="TTCalc.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:TTCalc"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Spacing="10">
+            <TextBlock>
+                <Span Foreground="Orange">T</Span>
+                ruth<Span Foreground="Orange">T</Span>
+                able<Span Foreground="Orange">Calc</Span>
+                ulator</TextBlock>
+            <TextBox
+                x:Name="Expression"
+                Header="Input your expression here"
+                TextChanged="Expression_TextChanged" />
+            <TextBlock x:Name="ExpQueue" />
+            <StackPanel x:Name="AnswerStack" />
+            <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

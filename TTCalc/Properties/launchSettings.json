@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "TTCalc (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "TTCalc (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
