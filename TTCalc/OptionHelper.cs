@@ -11,7 +11,8 @@ internal class OptionHelper
     private static readonly IDictionary<OptionType, int> s_options = new Dictionary<OptionType, int>()
     {
         { OptionType.LeftBracket, -1 },
-        { OptionType.Invert,3 },
+        { OptionType.Invert,4 },
+        { OptionType.Nand, 3 },
         { OptionType.And, 2 },
         { OptionType.Or, 1 },
         { OptionType.Xor, 2 },
@@ -25,6 +26,7 @@ internal class OptionHelper
         '!' or '~' => OptionType.Invert,
         '|' or '+' => OptionType.Or,
         '&' or '*' => OptionType.And,
+        '#' => OptionType.Nand,
         '^' => OptionType.Xor,
         ')' => OptionType.RightBracket,
         '(' => OptionType.LeftBracket,
@@ -39,6 +41,7 @@ internal class OptionHelper
 
     internal static char GetChar(OptionType option) => option switch
     {
+        OptionType.Nand => '#',
         OptionType.Or => '|',
         OptionType.Xor => '^',
         OptionType.And => '&',
@@ -51,5 +54,5 @@ internal class OptionHelper
 
 internal enum OptionType
 {
-    None, And, Or, Xor, Invert, LeftBracket, RightBracket
+    None, And, Or, Xor, Invert, Nand, LeftBracket, RightBracket
 }

@@ -30,32 +30,47 @@ public sealed partial class MainWindow : Window
         InitializeComponent();
     }
 
-    private void myButton_Click(object sender, RoutedEventArgs e)
-    {
-        myButton.Content = "Clicked";
-    }
-
     private void Expression_TextChanged(object sender, TextChangedEventArgs e)
     {
         _calculator.Expression = Expression.Text;
         ExpQueue.Text = _calculator.ReversePolish;
-        var answers = _calculator.Answers;
+
+        bool[] answers = _calculator.Answers;
         if (answers.Length > 0)
         {
+            TextBlock text;
             AnswerStack.Children.Clear();
-            var panel = new StackPanel() { Orientation = Orientation.Horizontal };
-            foreach (var symbol in _calculator.Symbols)
+            AnswerStack.ColumnDefinitions.Clear();
+            AnswerStack.RowDefinitions.Clear();
+            var symbols = _calculator.Symbols;
+
+            // row for header
+            AnswerStack.RowDefinitions.Add(new() { Height = new(1, GridUnitType.Star) });
+            for (int i = 0; i < symbols.Count; ++i)
             {
-                panel.Children.Add(new TextBlock { Text = symbol + ", " });
+                text = new() { Text = symbols[i] };
+                AnswerStack.ColumnDefinitions.Add(new() { Width = new(1, GridUnitType.Star) });
+                AnswerStack.Children.Add(text);
+                Grid.SetColumn(text, i);
             }
-            AnswerStack.Children.Add(panel);
+
+            // column for value
+            AnswerStack.ColumnDefinitions.Add(new() { Width = new(1, GridUnitType.Star) });
+
             for (int i = 0; i < answers.Length; i++)
             {
-                panel = new StackPanel() { Orientation = Orientation.Horizontal };
-                panel.Children.Add(new TextBlock { Text = Convert.ToString(i, 2).PadLeft(10, '0') });
-                panel.Children.Add(new TextBlock { Text = "---" });
-                panel.Children.Add(new TextBlock { Text = answers[i].ToString() });
-                AnswerStack.Children.Add(panel);
+                AnswerStack.RowDefinitions.Add(new() { Height = new(1, GridUnitType.Star) });
+                for (int j = 0; j < symbols.Count; ++j)
+                {
+                    text = new() { Text = (i & (1 << j)) > 0 ? "1" : "0" };
+                    AnswerStack.Children.Add(text);
+                    Grid.SetRow(text, i + 1);
+                    Grid.SetColumn(text, symbols.Count - j - 1);
+                }
+                text = new() { Text = answers[i] ? "1" : "0" };
+                AnswerStack.Children.Add(text);
+                Grid.SetRow(text, i + 1);
+                Grid.SetColumn(text, symbols.Count);
             }
         }
     }

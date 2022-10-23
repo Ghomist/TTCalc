@@ -72,7 +72,10 @@ internal class Calculator
                         while (i < value.Length && OptionHelper.Parse(value[i]) == OptionType.None) i++;
                         var symbol = value[start..i];
                         expQueue.Enqueue(symbol);
-                        symbols.Add(symbol);
+                        if (symbol != "0" && symbol != "1")
+                        {
+                            symbols.Add(symbol);
+                        }
                     }
                 }
                 while (optionStack.TryPop(out var option))
@@ -119,6 +122,7 @@ internal class Calculator
                                     OptionType.And => a && b,
                                     OptionType.Or => a || b,
                                     OptionType.Xor => a ^ b,
+                                    OptionType.Nand => !(a && b),
                                     _ => false
                                 });
                             }

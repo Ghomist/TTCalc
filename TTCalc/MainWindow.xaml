@@ -9,18 +9,32 @@
 
     <ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Center">
         <StackPanel Spacing="10">
-            <TextBlock>
-                <Span Foreground="Orange">T</Span>
-                ruth<Span Foreground="Orange">T</Span>
-                able<Span Foreground="Orange">Calc</Span>
-                ulator</TextBlock>
+            <!--<StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="20">
+                    <Span Foreground="Orange">T</Span>
+                    ruth</TextBlock>
+                <TextBlock FontSize="20">
+                    <Span Foreground="Orange">T</Span>
+                    able</TextBlock>
+                <TextBlock FontSize="20">
+                    <Span Foreground="Orange">Calc</Span>
+                    ulator</TextBlock>
+            </StackPanel>-->
             <TextBox
                 x:Name="Expression"
                 Header="Input your expression here"
+                IsSpellCheckEnabled="False"
                 TextChanged="Expression_TextChanged" />
-            <TextBlock x:Name="ExpQueue" />
-            <StackPanel x:Name="AnswerStack" />
-            <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
+            <TextBlock x:Name="ExpQueue" FontFamily="Cascadia Code" />
+            <Grid
+                x:Name="AnswerStack"
+                Padding="10,4"
+                HorizontalAlignment="Center"
+                BorderBrush="Black"
+                BorderThickness="1"
+                ColumnSpacing="10"
+                CornerRadius="4"
+                RowSpacing="4" />
         </StackPanel>
     </ScrollViewer>
 </Window>
